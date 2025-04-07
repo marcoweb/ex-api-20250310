@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import application.record.AutorDTO;
+
 @Entity
 @Table(name = "autores")
 @Getter
@@ -21,4 +23,9 @@ public class Autor {
     private long id;
     @Column(nullable = false)
     private String nome;
+
+    public Autor(AutorDTO dto) {
+        this.id = dto.id();
+        this.nome = dto.nome();
+    }
 }

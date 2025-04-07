@@ -11,6 +11,10 @@ import application.model.Livro;
 import application.record.LivroDTO;
 import application.record.LivroInsertDTO;
 import application.repository.LivroRepository;
+import application.model.Autor;
+
+import java.util.stream.Collectors;
+import java.util.HashSet;
 
 @Service
 public class LivroService {
@@ -49,7 +53,7 @@ public class LivroService {
 
         resultado.get().setTitulo(livro.titulo());
         // resultado.get().setGeneros(livro.generos());
-        resultado.get().setAutores(livro.autores());
+        resultado.get().setAutores(livro.autores().stream().map(Autor::new).collect(Collectors.toCollection(HashSet::new)));
 
         return new LivroDTO(livroRepo.save(resultado.get()));
     }
